@@ -1,16 +1,23 @@
-<script setup>
-import { computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { computed } from "vue";
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
-    href: String,
-    active: Boolean,
+    href: {
+        type: String,
+        required: true,
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
 });
 
+// Clases dinámicas para el enlace activo
 const classes = computed(() => {
     return props.active
-        ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-        : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
+        ? "flex items-center p-2 rounded-lg text-sky-700 bg-blue-100 text-blue-700 transition-colors duration-200"
+        : "flex items-center p-2 rounded-lg text-sky-700 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200";
 });
 </script>
 
