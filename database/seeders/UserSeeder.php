@@ -36,11 +36,17 @@ class UserSeeder extends Seeder
             'email' => 'gustavo@gmail.com',
             'password' => Hash::make('gustavo123'),
         ]);
+        $user3 = User::create([
+            'name' => 'karin santamaria',
+            'email' => 'karinsntmr@gmail.com',
+            'password' => Hash::make('karin2706'),
+        ]);
         // link the roles with the permissions
         $role_administrador->syncPermissions($permissions_admin);
         $role_vendedor->syncPermissions($permissions_sales);
         // assuming the roles of the users
         $user->assignRole($role_administrador);
-        $user2->assignRole($role_vendedor);
+        $user2->assignRole($role_administrador);
+        $user3->assignRole($role_administrador);
     }
 }
