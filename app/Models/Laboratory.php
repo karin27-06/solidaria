@@ -17,6 +17,7 @@ class Laboratory extends Model
      */
     protected $fillable = [
         'name',
+        'state'
     ];
 
     /**

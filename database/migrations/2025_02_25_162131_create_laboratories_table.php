@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('laboratories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->nullable(false);
+            $table->boolean('state')->default(true)->comment('true: active, false: inactive');
             $table->timestamps();
         });
     }

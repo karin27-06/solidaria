@@ -17,7 +17,8 @@ class LaboratoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'state' => $this->state
         ];
     }
 }

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Pipelines\Filter;
 use App\Models\Laboratory;
 use App\Http\Requests\StoreLaboratoryRequest;
 use App\Http\Requests\UpdateLaboratoryRequest;
-use App\Actions\Pipelines\Filter;
 use App\Http\Resources\LaboratoryResource;
-use App\Pipelines\FilterByDate;
-use App\Pipelines\FilterByName;
-use App\Pipelines\FilterByState;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -68,6 +65,8 @@ class LaboratoryController extends Controller
     {
         Gate::authorize('create', Laboratory::class);
         $validated = $request->validated();
+        // Ommit State ,because is active default
+        $validated = $request->safe()->except(['state']);
         $laboratory = Laboratory::create($validated);
         return response()->json([
             self::SUCCESS_MESSAGE => true,
@@ -121,11 +120,9 @@ class LaboratoryController extends Controller
 
     public function searchLaboratory(Request $request)
     {
-        // array of filter classes to apply
-        $filters = [
-            FilterByName::class,
-        ];
-        $laboratories = (new Filter())->execute($filters);
+        // Pass the request to the execute method
+        $laboratories = (new Filter())->execute([], $request);
+        
         return response()->json([
             self::DATA => LaboratoryResource::collection($laboratories),
             self::PAGINATION => [
@@ -136,7 +133,6 @@ class LaboratoryController extends Controller
                 'from' => $laboratories->firstItem(),
                 'to' => $laboratories->lastItem(),
             ],
-            'filters applied' => $filters,
         ]);
     }
 }

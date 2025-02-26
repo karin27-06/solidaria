@@ -25,10 +25,17 @@ Route::middleware([
 });
 
 
-//Rutas para Laboratory controlador CRUD LABORATORY
-Route::get('/laboratories', [LaboratoryController::class, 'listLaboratory']); // Lista de laboratorios
-Route::get('/laboratories/search', [LaboratoryController::class, 'searchLaboratory']); // Búsqueda con filtros
-Route::get('/laboratories/{laboratory}', [LaboratoryController::class, 'show']); // Mostrar un laboratorio específico
-Route::post('/laboratories', [LaboratoryController::class, 'store']); // Crear un laboratorio
-Route::put('/laboratories/{laboratory}', [LaboratoryController::class, 'update']); // Actualizar laboratorio
-Route::delete('/laboratories/{laboratory}', [LaboratoryController::class, 'destroy']); // Eliminar laboratorio
+//Routes for laboratory
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    // Initial Route
+    
+    Route::prefix('modulo')->group(function () {
+        // Laboratories
+        Route::resource('laboratories', LaboratoryController::class)->except(['create']);
+        // Aditional route for list
+        Route::get('laboratories/list', [LaboratoryController::class, 'listLaboratory'])->name('laboratory.list');
+    });
+});
+
+// Search Route 
+Route::get('laboratories/search', [LaboratoryController::class, 'searchLaboratory'])->name('laboratory.search');
