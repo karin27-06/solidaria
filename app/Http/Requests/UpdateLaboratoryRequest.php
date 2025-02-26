@@ -25,17 +25,4 @@ class UpdateLaboratoryRequest extends FormRequest
             'name' => 'required|string|max:255', 
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'name.string' => 'El nombre debe ser un texto.',
-            'name.max' => 'El nombre no debe ser mayor a 255 caracteres.',
-        ];
-    }
 }

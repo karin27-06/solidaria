@@ -16,24 +16,11 @@ class Laboratory extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'name', // Nombre Laboratorio
+        'name',
     ];
 
     /**
      * Los atributos tipo nativos.
-     *
-     * @var array<string, string>
-     */
-    // protected function casts()
-    // {
-    //     return [
-    //         'created_at' => 'datetime',
-    //         'updated_at' => 'datetime',
-    //     ];
-    // }
-
-        /**
-     * Los atributos con conversión de tipo.
      *
      * @var array<string, string>
      */
