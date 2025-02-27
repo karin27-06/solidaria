@@ -19,10 +19,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         // CRUD MODULES
         Route::resource('doctor', DoctorController::class)->except(['create']);
         Route::resource('category', CategoryController::class)->except(['create']);
-        Route::resource('category', CategoryController::class)->except(['create']);
         Route::resource('laboratories', LaboratoryController::class)->except(['create']);
-        Route::resource('zone', ZoneController::class)->except(['create', 'show']);
-        Route::resource('supplier', SupplierController::class)->except(['create']);
         Route::resource('zone', ZoneController::class)->except(['create', 'show']);
         Route::resource('supplier', SupplierController::class)->except(['create']);
         // path/route to list
