@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::resource('laboratories', LaboratoryController::class)->except(['create']);
         Route::resource('zone', ZoneController::class)->except(['create', 'show']);
         Route::resource('supplier', SupplierController::class)->except(['create']);
+        Route::resource('zone', ZoneController::class)->except(['create', 'show']);
         // path/route to list
         Route::get('doctors/list', [DoctorController::class, 'listDoctor'])->name('doctor.list');
         Route::get('laboratories/list', [LaboratoryController::class, 'listLaboratory'])->name('laboratory.list');
