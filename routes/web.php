@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Autocomplete\SearchDoctorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\LaboratoryController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ZoneController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SupplierController;
 
 // SYSTEM START
@@ -27,6 +29,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('laboratories/list', [LaboratoryController::class, 'listLaboratory'])->name('laboratory.list');
         Route::get('categories/list', [CategoryController::class, 'listCategory'])->name('category.list');
         Route::get('zone/list', [ZoneController::class, 'listZone'])->name('zone.list');
+
+        // path/route to search
+
+        // * view search
+        Route::get('search', [SearchController::class, 'viewSearch'])->name('search');
+        // * search for doctors by name
+        Route::get('search/doctor', [SearchDoctorController::class, 'searchDoctor'])->name('search.doctor');
     });
 });
 
@@ -36,6 +45,6 @@ Route::get('laboratories/search', [LaboratoryController::class, 'searchLaborator
 Route::get('zones/search', [ZoneController::class, 'searchZone'])->name('zone.search');
 Route::get('categories/search', [ZoneController::class, 'searchCategory'])->name('category.search');
 Route::get('category/list', [CategoryController::class, 'listCategory'])->name('category.list');
-Route::post('category/add/', [CategoryController::class, 'store'])->name('category.store'); 
-Route::put('category/update/{category}', [CategoryController::class, 'update'])->name('category.update'); 
-Route::delete('category/delete/{category}', [CategoryController::class, 'destroy'])->name('category.destroy'); 
+Route::post('category/add/', [CategoryController::class, 'store'])->name('category.store');
+Route::put('category/update/{category}', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('category/delete/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
