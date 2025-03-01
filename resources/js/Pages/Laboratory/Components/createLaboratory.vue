@@ -63,7 +63,7 @@ watch(() => props.visible, (val) => {
 watch(() => props.laboratory, (val) => {
   if (val) {
     newLaboratoryName.value = val.name;
-    laboratoryState.value = val.state;
+    laboratoryState.value = Boolean(val.state);
     laboratoryId.value = val.id;
     editMode.value = true;
   } else {

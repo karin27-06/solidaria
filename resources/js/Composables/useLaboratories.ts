@@ -87,28 +87,30 @@ export default function useLaboratories(toast: any) {
         }
     };
 
+
     const handleUpdateLaboratory = async (id: number, data: Partial<Omit<Laboratory, 'id' | 'created_at' | 'updated_at'>>) => {
         try {
-            await updateLaboratory(id, data);
-            toast.add({
-                severity: 'success',
-                summary: 'Éxito',
-                detail: 'Laboratorio actualizado exitosamente',
-                life: 3000
-            });
-            await fetchLaboratories();
-            closeCreateModal();
+         // console.log('Updating laboratory with data:', data);
+          await updateLaboratory(id, data);
+          toast.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Laboratorio actualizado exitosamente',
+            life: 3000
+          });
+          await fetchLaboratories();
+          closeCreateModal();
         } catch (error) {
-            console.error('Error updating laboratory:', error);
-            toast.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Error al actualizar el laboratorio',
-                life: 3000
-            });
+          console.error('Error updating laboratory:', error);
+          toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error al actualizar el laboratorio',
+            life: 3000
+          });
         }
-    };
-
+      };
+      
     const handleDeleteLaboratory = async (id: number) => {
         try {
             await deleteLaboratory(id);
