@@ -41,7 +41,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 Route::get('doctors/search', [DoctorController::class, 'searchDoctor'])->name('doctor.search');
+
 Route::get('laboratories/search', [LaboratoryController::class, 'searchLaboratory'])->name('laboratory.search');
+Route::get('laboratory/list', [LaboratoryController::class, 'listlaboratory'])->name('laboratory.list');
+Route::post('laboratory/add/', [LaboratoryController::class, 'store'])->name('laboratory.store');
+Route::put('laboratory/update/{laboratory}', [LaboratoryController::class, 'update'])->name('laboratory.update');
+Route::delete('laboratory/delete/{laboratory}', [LaboratoryController::class, 'destroy'])->name('laboratory.destroy');
+
 Route::get('zones/search', [ZoneController::class, 'searchZone'])->name('zone.search');
 Route::get('categories/search', [ZoneController::class, 'searchCategory'])->name('category.search');
 Route::get('category/list', [CategoryController::class, 'listCategory'])->name('category.list');

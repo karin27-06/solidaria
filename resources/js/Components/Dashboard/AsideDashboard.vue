@@ -150,6 +150,7 @@ const menuItems = [
     { label: "Trabajos", route: "profile.show", icon: "pi pi-briefcase" },
     { label: "Reportes", route: "dashboard", icon: "pi pi-chart-bar" },
     { label: "Zonas", route: "zone.index", icon: "pi pi-map" },
+    { label: "Laboratorios", route: "laboratories.index", icon: "pi pi-warehouse" },
     { label: "Busquedas", route: "search", icon: "pi pi-search" },
 ];
 
