@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Autocomplete\SearchDoctorController;
+use App\Http\Controllers\Autocomplete\SearchUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\LaboratoryController;
@@ -36,6 +37,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('search', [SearchController::class, 'viewSearch'])->name('search');
         // * search for doctors by name
         Route::get('search/doctor', [SearchDoctorController::class, 'searchDoctor'])->name('search.doctor');
+
+
+
+
+
+        // list permissions
+        Route::get('permissions', [SearchUserController::class, 'getPermissions'])->name('permissions');
     });
 });
 
