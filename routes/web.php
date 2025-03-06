@@ -9,6 +9,7 @@ use App\Http\Controllers\ZoneController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SupplierController;
 
@@ -20,17 +21,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('dashboard');
     Route::prefix('modulo')->group(function () {
         // CRUD MODULES
-        Route::resource('doctor', DoctorController::class)->except(['create']);
+        Route::resource('doctor', DoctorController::class)->except(['create', 'edit']);
         Route::resource('category', CategoryController::class)->except(['create', 'show']);
         Route::resource('laboratories', LaboratoryController::class)->except(['create']);
         Route::resource('zone', ZoneController::class)->except(['create', 'show']);
         Route::resource('supplier', SupplierController::class)->except(['create']);
+        Route::resource('role', RoleController::class)->except(['create', 'edit']);
         // path/route to list
         Route::get('doctors/list', [DoctorController::class, 'listDoctor'])->name('doctor.list');
         Route::get('laboratories/list', [LaboratoryController::class, 'listLaboratory'])->name('laboratory.list');
         Route::get('categories/list', [CategoryController::class, 'listCategory'])->name('category.list');
         Route::get('zone/list', [ZoneController::class, 'listZone'])->name('zone.list');
-
+        Route::get('roles/list', [RoleController::class, 'listRole'])->name('role.list');
         // path/route to search
 
         // * view search
