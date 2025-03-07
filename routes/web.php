@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('categories/list', [CategoryController::class, 'listCategory'])->name('category.list');
         Route::get('zone/list', [ZoneController::class, 'listZone'])->name('zone.list');
         Route::get('roles/list', [RoleController::class, 'listRole'])->name('role.list');
+        Route::get('suppliers/list', [SupplierController::class, 'listSupplier'])->name('supplier.list');
         // path/route to search
 
         // * view search

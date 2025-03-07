@@ -146,6 +146,7 @@ const menuItems = [
             { label: "Pacientes", route: "dashboard", icon: "pi pi-users" },
         ],
     },
+    { label: "Proveedor", route: "supplier.index", icon: "pi pi-pencil" },
     { label: "Notas", route: "dashboard", icon: "pi pi-pencil" },
     { label: "Trabajos", route: "profile.show", icon: "pi pi-briefcase" },
     { label: "Reportes", route: "dashboard", icon: "pi pi-chart-bar" },
