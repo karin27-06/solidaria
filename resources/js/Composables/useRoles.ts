@@ -84,6 +84,7 @@ export const useRoles = () => {
             if (response.success) {
                 showInfo(response.message);
                 loadingRoles(father.pagination.current_page, father.filter);
+                father.statusModal.delete = false;
             }
         } catch (error) {
             console.error("Error deleting role:", error);
