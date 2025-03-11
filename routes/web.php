@@ -51,4 +51,3 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 Route::get('doctors/search', [DoctorController::class, 'searchDoctor'])->name('doctor.search');
 Route::get('laboratories/search', [LaboratoryController::class, 'searchLaboratory'])->name('laboratory.search');
 Route::get('zones/search', [ZoneController::class, 'searchZone'])->name('zone.search');
-Route::get('categories/search', [ZoneController::class, 'searchCategory'])->name('category.search');
