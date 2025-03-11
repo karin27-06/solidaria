@@ -37,7 +37,7 @@ class LaboratoryController extends Controller
             $laboratories = Laboratory::when($name, function ($query, $name) {
                 return $query->where('name', 'like', "%$name%");
             })
-            ->orderBy('created_at', 'asc')
+            ->orderBy('id', 'asc')
             ->paginate(10);
             return response()->json([
                 self::DATA => LaboratoryResource::collection($laboratories),

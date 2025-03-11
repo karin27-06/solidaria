@@ -1,37 +1,35 @@
 import { ref, onMounted } from 'vue';
 import { Laboratory, LaboratoryResponse } from '@/Pages/Laboratory/Interfaces/LaboratoryResponse';
-import {LaboratoryServices} from '@/Services/LaboratoryService';
-import { LaboratoryDates } from '@/Pages/Laboratory/Interfaces/Laboratory';
+import { getLaboratories, createLaboratory, updateLaboratory, deleteLaboratory } from '@/Services/LaboratoryService';
 
-export default function useLaboratories(toast) {
+export default function useLaboratories(toast: any) {
     const laboratoriesData = ref<Laboratory[]>([]);
     const loadingTable = ref<boolean>(true);
-    const pagination = ref<LaboratoryResponse["pagination"]>({
+    const pagination = ref({
         total: 0,
         current_page: 1,
         per_page: 20,
         last_page: 0,
         from: 0,
-        to: 0,
+        to: 0
     });
-
     const showCreateModal = ref<boolean>(false);
     const showDeleteModal = ref<boolean>(false);
     const selectedLaboratory = ref<Laboratory | null>(null);
 
-    const fetchLaboratories = async (page = 1, name = "") => {
+    const fetchLaboratories = async (page = 1, name = '') => {
         loadingTable.value = true;
         try {
-            const response = await LaboratoryServices.getLaboratories(page, name);
+            const response = await getLaboratories(page, name);
             laboratoriesData.value = response.data;
             pagination.value = response.pagination;
         } catch (error) {
-            console.error("Error fetching laboratories:", error);
+            console.error('Error fetching laboratories:', error);
             toast.add({
-                severity: "error",
-                summary: "Error",
-                detail: "Error al cargar los laboratorios",
-                life: 3000,
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Error al cargar los laboratorios',
+                life: 3000
             });
         } finally {
             loadingTable.value = false;
@@ -67,32 +65,33 @@ export default function useLaboratories(toast) {
         selectedLaboratory.value = null;
     };
 
-    const handleCreateLaboratory = async (laboratory: LaboratoryDates) => {
+    const handleCreateLaboratory = async (laboratory: Omit<Laboratory, 'id' | 'created_at' | 'updated_at'>) => {
         try {
-          await LaboratoryServices.saveLaboratory(laboratory);
-          toast.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: 'Laboratorio creado exitosamente',
-            life: 3000
-          });
-          await fetchLaboratories();
-          closeCreateModal();
+            await createLaboratory(laboratory);
+            toast.add({
+                severity: 'success',
+                summary: 'Éxito',
+                detail: 'Laboratorio creado exitosamente',
+                life: 3000
+            });
+            await fetchLaboratories();
+            closeCreateModal();
         } catch (error) {
-          console.error('Error creating laboratory:', error);
-          toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Error al crear el laboratorio',
-            life: 3000
-          });
+            console.error('Error creating laboratory:', error);
+            toast.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Error al crear el laboratorio',
+                life: 3000
+            });
         }
-      };
+    };
 
 
-      const handleUpdateLaboratory = async (id: number, data: LaboratoryDates) => {
+    const handleUpdateLaboratory = async (id: number, data: Partial<Omit<Laboratory, 'id' | 'created_at' | 'updated_at'>>) => {
         try {
-          await LaboratoryServices.updateLaboratory(id, data);
+         // console.log('Updating laboratory with data:', data);
+          await updateLaboratory(id, data);
           toast.add({
             severity: 'success',
             summary: 'Éxito',
@@ -102,34 +101,34 @@ export default function useLaboratories(toast) {
           await fetchLaboratories();
           closeCreateModal();
         } catch (error) {
-            console.error("Error updating laboratory:", error);
-            toast.add({
-                severity: "error",
-                summary: "Error",
-                detail: "Error al actualizar el laboratorio",
-                life: 3000,
-            });
+          console.error('Error updating laboratory:', error);
+          toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error al actualizar el laboratorio',
+            life: 3000
+          });
         }
-    };
-
+      };
+      
     const handleDeleteLaboratory = async (id: number) => {
         try {
-            await LaboratoryServices.deleteLaboratory(id);
+            await deleteLaboratory(id);
             toast.add({
-                severity: "success",
-                summary: "Éxito",
-                detail: "Laboratorio eliminado exitosamente",
-                life: 3000,
+                severity: 'success',
+                summary: 'Éxito',
+                detail: 'Laboratorio eliminado exitosamente',
+                life: 3000
             });
             await fetchLaboratories();
             closeDeleteModal();
         } catch (error) {
-            console.error("Error deleting laboratory:", error);
+            console.error('Error deleting laboratory:', error);
             toast.add({
-                severity: "error",
-                summary: "Error",
-                detail: "Error al eliminar el laboratorio",
-                life: 3000,
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Error al eliminar el laboratorio',
+                life: 3000
             });
         }
     };
@@ -154,6 +153,6 @@ export default function useLaboratories(toast) {
         closeDeleteModal,
         handleCreateLaboratory,
         handleUpdateLaboratory,
-        handleDeleteLaboratory,
+        handleDeleteLaboratory
     };
 }
