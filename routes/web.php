@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         // CRUD MODULES
         Route::resource('doctor', DoctorController::class)->except(['create', 'edit']);
         Route::resource('category', CategoryController::class)->except(['create', 'show']);
-        Route::resource('laboratories', LaboratoryController::class)->except(['create']);
+        Route::resource('laboratory', LaboratoryController::class)->except(['create', 'show']);
         Route::resource('zone', ZoneController::class)->except(['create', 'show']);
         Route::resource('supplier', SupplierController::class)->except(['create']);
         Route::resource('role', RoleController::class)->except(['create', 'edit']);
@@ -54,6 +54,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 Route::get('doctors/search', [DoctorController::class, 'searchDoctor'])->name('doctor.search');
 
 Route::get('laboratories/search', [LaboratoryController::class, 'searchLaboratory'])->name('laboratory.search');
+<<<<<<< HEAD
 Route::get('laboratory/list', [LaboratoryController::class, 'listlaboratory'])->name('laboratory.list');
 Route::post('laboratory/add/', [LaboratoryController::class, 'store'])->name('laboratory.store');
 Route::put('laboratory/update/{laboratory}', [LaboratoryController::class, 'update'])->name('laboratory.update');
@@ -61,3 +62,12 @@ Route::delete('laboratory/delete/{laboratory}', [LaboratoryController::class, 'd
 
 Route::get('zones/search', [ZoneController::class, 'searchZone'])->name('zone.search');
 Route::get('categories/search', [ZoneController::class, 'searchCategory'])->name('category.search');
+=======
+
+Route::get('zones/search', [ZoneController::class, 'searchZone'])->name('zone.search');
+Route::get('categories/search', [ZoneController::class, 'searchCategory'])->name('category.search');
+Route::get('category/list', [CategoryController::class, 'listCategory'])->name('category.list');
+Route::post('category/add/', [CategoryController::class, 'store'])->name('category.store');
+Route::put('category/update/{category}', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('category/delete/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+>>>>>>> ff5d16b2ffab6b50236bfce8f46669f5bcb9ca6b
