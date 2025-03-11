@@ -30,8 +30,8 @@ class CategoryController extends Controller
             $categories = Category::when($request->query('name'), function ($query, $name) {
                 return $query->where('name', 'like', "%$name%");
             })
-                ->orderBy('created_at', 'asc')
-                ->paginate(10);
+            ->orderBy('created_at', 'asc')
+            ->paginate(10);
 
             return response()->json([
                 self::DATA => CategoryResource::collection($categories),
